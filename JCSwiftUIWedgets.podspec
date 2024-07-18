@@ -34,13 +34,14 @@ TODO: Add long description of the pod here.
   
   s.subspec 'SwiftUI+Ext' do |ui|
     ui.source_files = 'JCSwiftUIWedgets/Classes/SwiftUI+Ext/*'
+  end
 
   s.subspec 'Configure' do |ui|
     ui.source_files = 'JCSwiftUIWedgets/Classes/Configure/*'
+  end
     
   s.subspec 'Wedgets' do |ui|
     ui.source_files = 'JCSwiftUIWedgets/Classes/Wedgets/*'
-
   end
-
+    
 end
