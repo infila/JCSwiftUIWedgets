@@ -1,0 +1,6 @@
+use_frameworks!
+target 'JCSwiftUIWedgets_Tests' do
+  pod 'JCSwiftUIWedgets', :path => '../'
+  
+  
+end
