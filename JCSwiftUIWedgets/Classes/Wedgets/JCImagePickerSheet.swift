@@ -33,10 +33,10 @@ struct JCImagePickerSheetModifier: ViewModifier {
   }
 }
 
-public struct JCImagePickerSheet: View {
-  @Binding var isPresented: Bool
-
-  var didSelectImage: (UIImage) -> Void
+// Editing config.shared ensures that this component looks the same wherever it is used.
+// Or have a new Config() to make it special.
+public struct JCImagePickerSheetConfig {
+  static let shared = JCImagePickerSheetConfig()
 
   var grantCameraPermissionString = "Grant camera permission"
   var takePhotoString = "Take a Photo"
@@ -44,16 +44,30 @@ public struct JCImagePickerSheet: View {
   var chooseFromAlbumString = "Choose From Album"
   var chooseFromAlbumIcon = Image(systemName: "photo.on.rectangle.angled")
 
+  var overlayColor = Color.gray.opacity(0.5)
+  var sheetHeight: CGFloat = 178
+  var backgroundColor = Color(withHex: "F0F0F0")
+  var foregroundColor = Color(withHex: "#333333")
+
+  var leftMargin: CGFloat = 32
+  var buttonHeight: CGFloat = 64
+  var buttonStyle = JCButtonStyle.HighlightStyle(backgroundColor: JCColorPair(normal: Color.clear, highlight: Color(withHex: "#CCCCCC")))
+}
+
+public struct JCImagePickerSheet: View {
+  @Binding var isPresented: Bool
+
+  var didSelectImage: (UIImage) -> Void
+
+  var config = JCImagePickerSheetConfig.shared
+
   @State private var isStarted = false
   @State private var showImagePicker = false
   @State private var sourceType: UIImagePickerController.SourceType = .camera
 
-  private let sheetOffsetY: CGFloat = -12
-  private let sheetHeight: CGFloat = 162
-
   public var body: some View {
     ZStack(alignment: .bottom) {
-      JCThemeColor.shared.sheetBackground.opacity(isStarted ? 0.75 : 0)
+      config.overlayColor.opacity(isStarted ? 1 : 0)
         .edgesIgnoringSafeArea(.all)
         .onTapGesture {
           isPresented = false
@@ -62,7 +76,7 @@ public struct JCImagePickerSheet: View {
         Spacer()
         VStack(spacing: 0) {
           Capsule()
-            .foregroundColor(JCThemeColor.shared.sheetForeground)
+            .foregroundColor(config.foregroundColor)
             .frame(width: 32, height: 2)
             .padding(12)
           Button {
@@ -73,38 +87,40 @@ public struct JCImagePickerSheet: View {
             sourceType = .camera
             showImagePicker = true
           } label: {
-            HStack(spacing: 0) {
-              takePhotoIcon
-                .padding([.leading, .trailing], 24)
-              Text(IsCameraDenied() ? grantCameraPermissionString : takePhotoString)
-                .foregroundColor(JCThemeColor.shared.sheetBackground)
+            HStack {
+              config.takePhotoIcon
+                .mask(color: config.foregroundColor)
+                .padding([.leading], config.leftMargin)
+              Text(IsCameraDenied() ? config.grantCameraPermissionString : config.takePhotoString)
+                .foregroundColor(config.foregroundColor)
                 .font(JCThemeFont.shared.M)
               Spacer()
             }
-            .frame(height: 64)
+            .frame(height: config.buttonHeight)
           }
-          .buttonStyle(JCButtonStyle.HighlightStyle())
+          .buttonStyle(config.buttonStyle)
           Button {
             sourceType = .photoLibrary
             showImagePicker = true
           } label: {
-            HStack(spacing: 0) {
-              chooseFromAlbumIcon
-                .padding([.leading, .trailing], 24)
-              Text(chooseFromAlbumString)
-                .foregroundColor(JCThemeColor.shared.sheetBackground)
+            HStack {
+              config.chooseFromAlbumIcon
+                .mask(color: config.foregroundColor)
+                .padding([.leading], config.leftMargin)
+              Text(config.chooseFromAlbumString)
+                .foregroundColor(config.foregroundColor)
                 .font(JCThemeFont.shared.M)
               Spacer()
             }
-            .frame(height: 64)
+            .frame(height: config.buttonHeight)
           }
-          .buttonStyle(JCButtonStyle.HighlightStyle())
+          .buttonStyle(config.buttonStyle)
           Spacer()
         }
-        .frame(height: sheetHeight + SAFE_AREA_INSETS.bottom)
-        .background(Color.white)
+        .frame(height: config.sheetHeight + SAFE_AREA_INSETS.bottom)
+        .background(config.backgroundColor)
         .cornerRadius(8, corners: [.topLeft, .topRight])
-      }.offset(y: isStarted ? 0 : sheetHeight + SAFE_AREA_INSETS.bottom)
+      }.offset(y: isStarted ? 0 : config.sheetHeight + SAFE_AREA_INSETS.bottom)
     }.edgesIgnoringSafeArea(.all)
       .onAppear {
         withAnimation {
@@ -129,9 +145,7 @@ public struct JCImagePickerSheet: View {
   }
 }
 
-struct JCImagePickerSheet_Previews: PreviewProvider {
-  static var previews: some View {
-    JCImagePickerSheet(isPresented: .constant(true)) { _ in
-    }
+#Preview {
+  JCImagePickerSheet(isPresented: .constant(true)) { _ in
   }
 }

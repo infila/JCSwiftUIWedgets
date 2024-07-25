@@ -7,33 +7,47 @@
 
 import SwiftUI
 
-struct JCMessageBox: View {
-  var message = "Message box"
+// Editing config.shared ensures that this component looks the same wherever it is used.
+// Or have a new Config() to make it special.
+public struct JCMessageBoxConfig {
+  static let shared: JCMessageBoxConfig = JCMessageBoxConfig()
+
   var boxWidth: CGFloat = UIScreen.main.bounds.width / 3 * 2
   var boxHeight: CGFloat = UIScreen.main.bounds.width / 2
 
-  var body: some View {
+  var backgroundColor: Color = JCThemeColor.shared.separateLine.opacity(0.75)
+
+  var boxBackgroundColor: Color = JCThemeColor.shared.textPrimary.opacity(0.9)
+
+  var cornerRadius: CGFloat = 12
+
+  var textColor: Color = JCThemeColor.shared.navigationBar
+  var font: Font = JCThemeFont.shared.navigationTitle
+  var alignment: TextAlignment = .center
+}
+
+
+public struct JCMessageBox: View {
+  var message: String
+  var config: JCMessageBoxConfig = JCMessageBoxConfig.shared
+
+  public var body: some View {
     ZStack {
-      JCThemeColor.shared.separateLine
+      config.backgroundColor
         .edgesIgnoringSafeArea(.all)
-        .opacity(0.75)
-      JCThemeColor.shared.textPrimary
-        .frame(width: boxWidth, height: boxHeight)
-        .opacity(0.9)
-        .cornerRadius(12)
+      config.boxBackgroundColor
+        .frame(width: config.boxWidth, height: config.boxHeight)
+        .cornerRadius(config.cornerRadius)
       Text(message)
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: boxWidth - 20)
-        .lineLimit(10)
-        .font(JCThemeFont.shared.navigationTitle)
+        .multilineTextAlignment(config.alignment)
+        .frame(maxWidth: config.boxWidth - 20, maxHeight: config.boxHeight - 20)
+        .font(config.font)
         .minimumScaleFactor(0.7)
-        .foregroundColor(JCThemeColor.shared.navigationBar)
+        .foregroundColor(config.textColor)
     }
   }
 }
 
-struct JCMessageBox_Previews: PreviewProvider {
-  static var previews: some View {
-    JCMessageBox()
-  }
+#Preview {
+  JCMessageBox(message: "Message box with a long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long Message")
 }

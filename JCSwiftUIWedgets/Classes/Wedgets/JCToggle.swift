@@ -7,29 +7,39 @@
 
 import SwiftUI
 
+// Editing config.shared ensures that this component looks the same wherever it is used.
+// Or have a new Config() to make it special.
+public struct JCToggleConfig {
+  static let shared = JCToggleConfig()
+
+  var width: CGFloat = 52
+  var height: CGFloat = 32
+
+  var backgroundColor = JCColorPair(normal: JCThemeColor.shared.separateLine, highlight: JCThemeColor.shared.success.opacity(0.3))
+  var foregroundColor = JCColorPair(normal: JCThemeColor.shared.navigationBar, highlight: JCThemeColor.shared.success)
+
+  var thumbHeight: CGFloat = 24
+  var thumbOffset: CGFloat = 10
+}
+
 public struct JCToggle: View {
   var tintColor: Color = JCThemeColor.shared.primary
   @Binding var isOn: Bool
   var onChange: ((Bool) -> Void)?
 
-  var width: CGFloat = 52
-  var height: CGFloat = 32
-
-  var backgroundColor = JCColorPair(normal: JCThemeColor.shared.separateLine, pressed: JCThemeColor.shared.separateLine)
-
-  var foregroundColor = JCColorPair(normal: JCThemeColor.shared.navigationBar, pressed: JCThemeColor.shared.success)
+  var config = JCToggleConfig.shared
 
   public var body: some View {
     ZStack {
       Capsule()
-        .fill(isOn ? backgroundColor.pressed : backgroundColor.normal)
+        .fill(isOn ? config.backgroundColor.highlight : config.backgroundColor.normal)
 
       Circle()
-        .fill(isOn ? foregroundColor.pressed : foregroundColor.normal)
-        .frame(height: height - 8)
-        .offset(x: isOn ? 10 : -10)
+        .fill(isOn ? config.foregroundColor.highlight : config.foregroundColor.normal)
+        .frame(height: config.thumbHeight)
+        .offset(x: isOn ? config.thumbOffset : -config.thumbOffset)
     }
-    .frame(width: width, height: height)
+    .frame(width: config.width, height: config.height)
     .onTapGesture {
       withAnimation {
         isOn.toggle()
@@ -39,11 +49,9 @@ public struct JCToggle: View {
   }
 }
 
-struct JCToggle_Previews: PreviewProvider {
-  static var previews: some View {
-    VStack {
-      JCToggle(isOn: .constant(false))
-      JCToggle(isOn: .constant(true))
-    }
+#Preview {
+  VStack {
+    JCToggle(isOn: .constant(false))
+    JCToggle(isOn: .constant(true))
   }
 }

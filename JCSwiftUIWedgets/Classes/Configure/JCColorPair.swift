@@ -9,5 +9,5 @@ import SwiftUI
 
 public struct JCColorPair {
   var normal: Color
-  var pressed: Color
+  var highlight: Color
 }

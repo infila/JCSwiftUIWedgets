@@ -27,31 +27,51 @@ struct JCLoadingViewModifier: ViewModifier {
   }
 }
 
-struct JCLoadingView: View {
-  @State private var isAppeared = true
-  @State private var isRotated = true
+enum JCLoadingSpin {
+  case image(Image)
+  case circle(trimEnd: CGFloat, lineWidth: CGFloat, strokeColor: Color, diameter: CGFloat)
+}
 
-  var backgroundColor = Color.gray
+// Editing config.shared ensures that this component looks the same wherever it is used.
+// Or have a new Config() to make it special.
+public struct JCLoadingViewConfig {
+  static let shared = JCLoadingViewConfig()
 
-  var body: some View {
+  var backgroundColor = Color.gray.opacity(0.4)
+  var spin: JCLoadingSpin = JCLoadingSpin.circle(trimEnd: 0.6, lineWidth: 4, strokeColor: JCThemeColor.shared.success, diameter: 50)
+}
+
+public struct JCLoadingView: View {
+  var config: JCLoadingViewConfig = JCLoadingViewConfig.shared
+
+  public var body: some View {
     GeometryReader { geo in
       ZStack {
-        backgroundColor
+        config.backgroundColor
           .edgesIgnoringSafeArea(.all)
-          .opacity(0.75)
+
         if isAppeared {
-          Circle()
-            .trim(from: 0, to: 0.6)
-            .stroke(
-              JCThemeColor.shared.success,
-              lineWidth: 4
-            )
-            .frame(width: 50, height: 50)
-            .rotationEffect(.degrees(isRotated ? 360 : 0))
-            .animation(.linear(duration: 1).repeatForever(autoreverses: false))
-            .onAppear {
-              isRotated = true
-            }
+          switch config.spin {
+          case let .image(image):
+            image.rotationEffect(.degrees(isRotated ? 360 : 0))
+              .animation(.linear(duration: 1).repeatForever(autoreverses: false))
+              .onAppear {
+                isRotated = true
+              }
+          case let .circle(trimEnd, lineWidth, strokeColor, diameter):
+            Circle()
+              .trim(from: 0, to: trimEnd)
+              .stroke(
+                strokeColor,
+                lineWidth: lineWidth
+              )
+              .frame(width: diameter, height: diameter)
+              .rotationEffect(.degrees(isRotated ? 360 : 0))
+              .animation(.linear(duration: 1).repeatForever(autoreverses: false))
+              .onAppear {
+                isRotated = true
+              }
+          }
         }
       }
       .onAppear {
@@ -64,10 +84,14 @@ struct JCLoadingView: View {
       }
     }
   }
+
+  @State internal var isAppeared = false
+  @State internal var isRotated = false
 }
 
-struct JCLoadingView_Previews: PreviewProvider {
-  static var previews: some View {
-    JCLoadingView()
-  }
+#Preview {
+//      JCLoadingView(config: JCLoadingViewConfig(spin:.image(Image(systemName: "arrowshape.forward")) ))
+
+  // set true to stop animation, otherwise CPU is pretty hot
+  JCLoadingView(isAppeared: true, isRotated: true)
 }

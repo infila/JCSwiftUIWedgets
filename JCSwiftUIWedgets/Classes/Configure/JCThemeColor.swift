@@ -25,14 +25,11 @@ public struct JCThemeColor {
   var textPrimary: Color = .black
   var textSecondary: Color = .secondary
 
-  var buttonPrimary = JCColorPair(normal: .green, pressed: .green.opacity(0.7))
-  var buttonPrimaryBorder = JCColorPair(normal: .blue.opacity(0.5), pressed: .blue.opacity(0.7))
-  var buttonPrimaryText = JCColorPair(normal: .white, pressed: .white)
+  var buttonPrimary = JCColorPair(normal: .green, highlight: .green.opacity(0.7))
+  var buttonPrimaryBorder = JCColorPair(normal: .blue.opacity(0.5), highlight: .blue.opacity(0.7))
+  var buttonPrimaryText = JCColorPair(normal: .white, highlight: .white)
 
-  var buttonSecondary = JCColorPair(normal: .gray.opacity(0.3), pressed: .gray.opacity(0.7))
-  var buttonSecondaryBorder = JCColorPair(normal: .secondary, pressed: .secondary.opacity(0.5))
-  var buttonSecondaryText = JCColorPair(normal: .black, pressed: .secondary)
-
-  var sheetBackground = Color(withHex: "#212121")
-  var sheetForeground = Color(withHex: "#757575")
+  var buttonSecondary = JCColorPair(normal: .gray.opacity(0.3), highlight: .gray.opacity(0.7))
+  var buttonSecondaryBorder = JCColorPair(normal: .secondary, highlight: .secondary.opacity(0.5))
+  var buttonSecondaryText = JCColorPair(normal: .black, highlight: .secondary)
 }

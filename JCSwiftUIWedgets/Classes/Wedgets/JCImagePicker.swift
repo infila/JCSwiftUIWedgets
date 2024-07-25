@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+// PhotosPicker only support iOS 16+, so I wrote this instead.
 public struct JCImagePicker: UIViewControllerRepresentable {
   @Environment(\.presentationMode) private var presentationMode
   @Binding var sourceType: UIImagePickerController.SourceType
@@ -46,8 +47,6 @@ public struct JCImagePicker: UIViewControllerRepresentable {
   }
 }
 
-struct ImagePickerView_Previews: PreviewProvider {
-  static var previews: some View {
-    JCImagePicker(sourceType: .constant(.photoLibrary)) { _ in }
-  }
+#Preview {
+  JCImagePicker(sourceType: .constant(.photoLibrary)) { _ in }
 }
