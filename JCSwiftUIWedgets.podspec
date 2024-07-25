@@ -8,18 +8,11 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JCSwiftUIWedgets'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'Customized SwiftUI Wedgets'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = "This framework contains some custom components. Since many native SwiftUI methods do not support iOS 13 or 14, I have written some components to support these versions. And all components support "theme mode", which meaning you only need to modify one config, and the appearance will change everywhere.
+"
 
   s.homepage         = 'https://github.com/James/JCSwiftUIWedgets'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
