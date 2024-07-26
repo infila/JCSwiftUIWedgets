@@ -1,0 +1,25 @@
+PODS:
+  - JCSwiftUIWedgets (1.0.0):
+    - JCSwiftUIWedgets/Configure (= 1.0.0)
+    - "JCSwiftUIWedgets/SwiftUI+Ext (= 1.0.0)"
+    - JCSwiftUIWedgets/Wedgets (= 1.0.0)
+  - JCSwiftUIWedgets/Configure (1.0.0):
+    - "JCSwiftUIWedgets/SwiftUI+Ext"
+  - "JCSwiftUIWedgets/SwiftUI+Ext (1.0.0)"
+  - JCSwiftUIWedgets/Wedgets (1.0.0):
+    - JCSwiftUIWedgets/Configure
+    - "JCSwiftUIWedgets/SwiftUI+Ext"
+
+DEPENDENCIES:
+  - JCSwiftUIWedgets (from `../`)
+
+EXTERNAL SOURCES:
+  JCSwiftUIWedgets:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JCSwiftUIWedgets: 827b48c3f620408520e30159bb4410c47a85cc1f
+
+PODFILE CHECKSUM: 86e7ced3f5a7d002810bdc1095c90162fcb07e4d
+
+COCOAPODS: 1.15.2
