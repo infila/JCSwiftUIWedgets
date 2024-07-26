@@ -19,7 +19,7 @@ Here are three frameworks for junior developers. They can help you increase deve
 
 ### JCButtonStyle
 
-<img src="READMEAssets/ButtonStyles" width="600px"></img>
+<img src="READMEAssets/ButtonStyles.png" width="600px"></img>
 
 2 steps to make a customized ButtonStyle, and apply:
 * Step 1, add an extension like: 
@@ -57,9 +57,7 @@ HStack(spacing: 4) {
 .buttonStyle(JCButtonStyle.FixedSizeRounded.smallYellow)
 ```
 
-### 
-
-You can find more examples in each file's #Preview{}.
+** You can find more examples in each file's #Preview{}.**
 
 ## Requirements
 
