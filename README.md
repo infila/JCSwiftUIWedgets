@@ -17,7 +17,49 @@ Here are three frameworks for junior developers. They can help you increase deve
 
 ## Example
 
-You can find some examples in each file's #Preview{}.
+### JCButtonStyle
+
+<img src="READMEAssets/ButtonStyles" width="600px"></img>
+
+2 steps to make a customized ButtonStyle, and apply:
+* Step 1, add an extension like: 
+```ruby
+extension JCButtonStyle.FixedSizeRounded {
+  static let smallYellow = JCButtonStyle.FixedSizeRounded(
+    width: 66,
+    height: 40,
+    cornerRadius: 8,
+    textFont: JCThemeFont.shared.S,
+    textColor: JCColorPair(normal: .white, highlight: .white),
+    backgroundColor: JCColorPair(normal: .yellow, highlight: .yellow.opacity(0.5)),
+    strokeColor: JCColorPair(normal: .yellow, highlight: .orange)
+  )
+}
+```
+
+* Step 2, applying:
+```ruby
+Button("Button") {
+  print("Button Clicked")
+}
+.buttonStyle(JCButtonStyle.FixedSizeRounded.smallYellow)
+```
+
+or applying on A HStack with a icon and a title:
+```ruby
+HStack(spacing: 4) {
+  Image(systemName: "pencil.circle")
+  Text("Edit")
+}
+.buttonWrapped {
+  print("Button Clicked")
+}
+.buttonStyle(JCButtonStyle.FixedSizeRounded.smallYellow)
+```
+
+### 
+
+You can find more examples in each file's #Preview{}.
 
 ## Requirements
 
