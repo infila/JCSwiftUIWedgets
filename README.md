@@ -19,7 +19,7 @@ Here are three frameworks for junior developers. They can help you increase deve
 
 ### JCButtonStyle
 
-<img src="READMEAssets/ButtonStyles.png" width="600px"></img>
+<img src="READMEAssets/ButtonStyles.png" width="300px"></img>
 
 2 steps to make a customized ButtonStyle, and apply:
 * Step 1, add an extension like: 
