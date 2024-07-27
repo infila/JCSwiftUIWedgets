@@ -7,13 +7,13 @@
 
 ## Introduction
 
-JCFramework contains three frameworks for junior developers. They can help you increase development efficiency and write more standardized, maintainable code.
+There are three frameworks for junior developers. They can help you increase development efficiency and write more standardized, maintainable code.
 
-[JCSwiftCommon](https://github.com/infila/JCSwiftCommon): for extensions, some common function, and a lightweight local storage tool based on file system IO.
+[JCSwiftCommon](https://github.com/infila/JCSwiftCommon): for extensions, some common functions, and a lightweight local storage tool based on file system IO.
 
-[JCSwiftRestful](https://github.com/infila/JCSwiftRestful): for Restful APIs. It helps you focus more on handling object-oriented and structured data. To use this framework, you will have to write code using more standard RESTful semantics, both on iOS and server sides. Otherwise, the automatic serialization and deserialization functions within this framework will not work.
+[JCSwiftRestful](https://github.com/infila/JCSwiftRestful): for Restful APIs. It helps you focus more on handling object-oriented and structured data. To use this framework, you have to write code using more standard RESTful semantics, both on iOS and server sides. Otherwise, the automatic serialization and deserialization functions within this framework will not work.
 
-[JCSwiftUIWedgets](https://github.com/infila/JCSwiftRestful): contains some custom components. Since many native SwiftUI methods do not support iOS 13 or 14, I have written some components to support these versions. And all components support "theme mode", which meaning you only need to modify one config, and the appearance will change everywhere.
+[JCSwiftUIWedgets](https://github.com/infila/JCSwiftRestful): contains some custom components. Since many native SwiftUI methods do not support iOS 13 or 14, I have written some components to support these versions. And all components support "theme mode", which means you only need to modify one config, and the appearance will change everywhere.
 
 ## Example
 
@@ -22,7 +22,8 @@ JCFramework contains three frameworks for junior developers. They can help you i
 <img src="READMEAssets/ButtonStyles.png" width="300px"></img>
 
 Only two steps to make a customized ButtonStyle, and apply it to a button:
-**Step 1:** add an extension to JCButtonStyle.FixedSizeRounded, like the following: 
+
+*Step 1: Add an extension to JCButtonStyle.FixedSizeRounded, like the following: 
 ```ruby
 extension JCButtonStyle.FixedSizeRounded {
   static let smallYellow = JCButtonStyle.FixedSizeRounded(
@@ -76,9 +77,9 @@ pod 'JCSwiftUIWedgets'
 
 ## Author
 
-**James,**  Contact: infilachen@gmail.com, [LinkedIn](https://www.linkedin.com/in/jameschen5428)
+James, infilachen@gmail.com, [LinkedIn](https://www.linkedin.com/in/jameschen5428)
 
-Fanny,  Contact: fanfan.feng9@gmail.com
+Fanny, fanfan.feng9@gmail.com
 
 ## License
 
