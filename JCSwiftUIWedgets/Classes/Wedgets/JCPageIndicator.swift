@@ -9,20 +9,20 @@ import SwiftUI
 
 // Editing config.shared ensures that this component looks the same wherever it is used.
 public struct JCPageIndicatorConfig {
-  static let shared = JCPageIndicatorConfig()
+  public static let shared = JCPageIndicatorConfig()
 
-  var defaultColor = JCThemeColor.shared.success
-  var selectedColor = JCThemeColor.shared.primary
+  public var defaultColor = JCThemeColor.shared.success
+  public var selectedColor = JCThemeColor.shared.primary
 
-  var dotSpacing: CGFloat = 8
-  var dotDiameter: CGFloat = 5
+  public var dotSpacing: CGFloat = 8
+  public var dotDiameter: CGFloat = 5
 }
 
 public struct JCPageIndicator: View {
-  var pageIndex: Int
-  var total: Int
+  public var pageIndex: Int
+  public var total: Int
 
-  var config = JCPageIndicatorConfig.shared
+  public var config = JCPageIndicatorConfig.shared
 
   public var body: some View {
     HStack(spacing: config.dotSpacing) {

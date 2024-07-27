@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension View {
+public extension View {
   func showLoading(_ loading: Bool) -> some View {
     modifier(JCLoadingViewModifier(isPresented: loading))
   }
@@ -27,7 +27,7 @@ struct JCLoadingViewModifier: ViewModifier {
   }
 }
 
-enum JCLoadingSpin {
+public enum JCLoadingSpin {
   case image(Image)
   case circle(trimEnd: CGFloat, lineWidth: CGFloat, strokeColor: Color, diameter: CGFloat)
 }
@@ -35,10 +35,10 @@ enum JCLoadingSpin {
 // Editing config.shared ensures that this component looks the same wherever it is used.
 // Or have a new Config() to make it special.
 public struct JCLoadingViewConfig {
-  static let shared = JCLoadingViewConfig()
+  public static let shared = JCLoadingViewConfig()
 
-  var backgroundColor = Color.gray.opacity(0.4)
-  var spin: JCLoadingSpin = JCLoadingSpin.circle(trimEnd: 0.6, lineWidth: 4, strokeColor: JCThemeColor.shared.success, diameter: 50)
+  public var backgroundColor = Color.gray.opacity(0.4)
+  public var spin: JCLoadingSpin = JCLoadingSpin.circle(trimEnd: 0.6, lineWidth: 4, strokeColor: JCThemeColor.shared.success, diameter: 50)
 }
 
 public struct JCLoadingView: View {

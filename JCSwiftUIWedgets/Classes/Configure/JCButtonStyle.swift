@@ -10,16 +10,16 @@ import SwiftUI
 public struct JCButtonStyle {
   // A fixed-size with rounded corner style
   // see JCButtonStyles_Previews for examples
-  struct FixedSizeRounded: ButtonStyle {
-    var width: CGFloat
-    var height: CGFloat
+  public struct FixedSizeRounded: ButtonStyle {
+    public var width: CGFloat
+    public var height: CGFloat
     //  cornerRadius should be suitable
-    var cornerRadius: CGFloat = 12
-    var textFont: Font = JCThemeFont.shared.L
-    var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal, highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
-    var backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimary.normal, highlight: JCThemeColor.shared.buttonPrimary.highlight)
-    var strokeColor: JCColorPair? = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryBorder.normal, highlight: JCThemeColor.shared.buttonPrimaryBorder.highlight)
-    var strokeWidth: CGFloat = 2
+    public var cornerRadius: CGFloat = 12
+    public var textFont: Font = JCThemeFont.shared.L
+    public var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal, highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
+    public var backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimary.normal, highlight: JCThemeColor.shared.buttonPrimary.highlight)
+    public var strokeColor: JCColorPair? = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryBorder.normal, highlight: JCThemeColor.shared.buttonPrimaryBorder.highlight)
+    public var strokeWidth: CGFloat = 2
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
@@ -36,17 +36,17 @@ public struct JCButtonStyle {
 
   // A fixed-size with gradient background style
   // see JCButtonStyles_Previews for examples
-  struct GradientBackground: ButtonStyle {
-    var width: CGFloat
-    var height: CGFloat
-    var textFont: Font = JCThemeFont.shared.L
-    var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal,
-                                             highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
-    var colors: [JCColorPair] = [JCColorPair(normal: Color.purple.opacity(0.7),
-                                             highlight: Color.purple.opacity(0.9)),
-                                 JCColorPair(normal: Color.blue.opacity(0.7),
-                                             highlight: Color.blue.opacity(0.9))]
-    var cornerRadius: CGFloat = 16
+  public struct GradientBackground: ButtonStyle {
+    public var width: CGFloat
+    public var height: CGFloat
+    public var textFont: Font = JCThemeFont.shared.L
+    public var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal,
+                                                    highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
+    public var colors: [JCColorPair] = [JCColorPair(normal: Color.purple.opacity(0.7),
+                                                    highlight: Color.purple.opacity(0.9)),
+                                        JCColorPair(normal: Color.blue.opacity(0.7),
+                                                    highlight: Color.blue.opacity(0.9))]
+    public var cornerRadius: CGFloat = 16
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
@@ -62,12 +62,12 @@ public struct JCButtonStyle {
     }
   }
 
-  struct HighlightStyle: ButtonStyle {
-    var textFont: Font = JCThemeFont.shared.M
-    var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal, highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
-    var backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonSecondary.normal, highlight: JCThemeColor.shared.buttonSecondary.highlight)
+  public struct HighlightStyle: ButtonStyle {
+    public var textFont: Font = JCThemeFont.shared.M
+    public var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal, highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
+    public var backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonSecondary.normal, highlight: JCThemeColor.shared.buttonSecondary.highlight)
 
-    func makeBody(configuration: Self.Configuration) -> some View {
+    public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
         .font(textFont)
         .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
@@ -109,62 +109,60 @@ private extension JCButtonStyle.FixedSizeRounded {
   )
 }
 
-struct JCButtonStyles_Previews: PreviewProvider {
-  static var previews: some View {
-    VStack(spacing: 20) {
-      Button("RoundedCorner.main") {
-        print("Button Clicked")
-      }
-      .buttonStyle(JCButtonStyle.FixedSizeRounded.main)
-
-      Button("RoundedCorner.secondary") {
-        print("Button Clicked")
-      }
-      .buttonStyle(JCButtonStyle.FixedSizeRounded.secondary)
-
-      Button("Login") {
-        print("Button Clicked")
-      }
-      .buttonStyle(JCButtonStyle.FixedSizeRounded.loginButtonStyle)
-
-      // Small button needs suitable cornerRadius to avoid border issue, seems like a System bug
-      let width: CGFloat = 44, height: CGFloat = 32
-      HStack {
-        Button("A small FixedSizeRounded") {
-          print("Button Clicked")
-        }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 8))
-        Button("A small FixedSizeRounded") {
-          print("Button Clicked")
-        }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 10))
-        Button("A small FixedSizeRounded") {
-          print("Button Clicked")
-        }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 12))
-        Button("A small FixedSizeRounded") {
-          print("Button Clicked")
-        }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 14))
-        Button("A small FixedSizeRounded") {
-          print("Button Clicked")
-        }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 16))
-        Button("A small FixedSizeRounded") {
-          print("Button Clicked")
-        }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 18))
-      }
-
-      Button("GradientBackground") {
-        print("Button Clicked")
-      }
-      .buttonStyle(JCButtonStyle.GradientBackground(width: 220, height: 44))
-
-      HStack(spacing: 4) {
-        Image(systemName: "pencil.circle")
-        Text("Edit")
-      }
-      .buttonWrapped {
-        print("Button Clicked")
-      }
-      .buttonStyle(JCButtonStyle.FixedSizeRounded.regularButtonStyle)
+#Preview {
+  VStack(spacing: 20) {
+    Button("RoundedCorner.main") {
+      print("Button Clicked")
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(JCThemeColor.shared.background)
+    .buttonStyle(JCButtonStyle.FixedSizeRounded.main)
+
+    Button("RoundedCorner.secondary") {
+      print("Button Clicked")
+    }
+    .buttonStyle(JCButtonStyle.FixedSizeRounded.secondary)
+
+    Button("Login") {
+      print("Button Clicked")
+    }
+    .buttonStyle(JCButtonStyle.FixedSizeRounded.loginButtonStyle)
+
+    // Small button needs suitable cornerRadius to avoid border issue, seems like a System bug
+    let width: CGFloat = 44, height: CGFloat = 32
+    HStack {
+      Button("A small FixedSizeRounded") {
+        print("Button Clicked")
+      }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 8))
+      Button("A small FixedSizeRounded") {
+        print("Button Clicked")
+      }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 10))
+      Button("A small FixedSizeRounded") {
+        print("Button Clicked")
+      }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 12))
+      Button("A small FixedSizeRounded") {
+        print("Button Clicked")
+      }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 14))
+      Button("A small FixedSizeRounded") {
+        print("Button Clicked")
+      }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 16))
+      Button("A small FixedSizeRounded") {
+        print("Button Clicked")
+      }.buttonStyle(JCButtonStyle.FixedSizeRounded(width: width, height: height, cornerRadius: 18))
+    }
+
+    Button("GradientBackground") {
+      print("Button Clicked")
+    }
+    .buttonStyle(JCButtonStyle.GradientBackground(width: 220, height: 44))
+
+    HStack(spacing: 4) {
+      Image(systemName: "pencil.circle")
+      Text("Edit")
+    }
+    .buttonWrapped {
+      print("Button Clicked")
+    }
+    .buttonStyle(JCButtonStyle.FixedSizeRounded.regularButtonStyle)
   }
+  .frame(maxWidth: .infinity, maxHeight: .infinity)
+  .background(JCThemeColor.shared.background)
 }
