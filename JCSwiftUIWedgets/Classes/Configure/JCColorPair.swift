@@ -8,6 +8,6 @@
 import SwiftUI
 
 public struct JCColorPair {
-  var normal: Color
-  var highlight: Color
+  public var normal: Color
+  public var highlight: Color
 }

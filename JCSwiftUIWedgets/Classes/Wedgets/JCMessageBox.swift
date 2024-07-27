@@ -10,26 +10,25 @@ import SwiftUI
 // Editing config.shared ensures that this component looks the same wherever it is used.
 // Or have a new Config() to make it special.
 public struct JCMessageBoxConfig {
-  static let shared: JCMessageBoxConfig = JCMessageBoxConfig()
+  public static let shared: JCMessageBoxConfig = JCMessageBoxConfig()
 
-  var boxWidth: CGFloat = UIScreen.main.bounds.width / 3 * 2
-  var boxHeight: CGFloat = UIScreen.main.bounds.width / 2
+  public var boxWidth: CGFloat = UIScreen.main.bounds.width / 3 * 2
+  public var boxHeight: CGFloat = UIScreen.main.bounds.width / 2
 
-  var backgroundColor: Color = JCThemeColor.shared.separateLine.opacity(0.75)
+  public var backgroundColor: Color = JCThemeColor.shared.separateLine.opacity(0.75)
 
-  var boxBackgroundColor: Color = JCThemeColor.shared.textPrimary.opacity(0.9)
+  public var boxBackgroundColor: Color = JCThemeColor.shared.textPrimary.opacity(0.9)
 
-  var cornerRadius: CGFloat = 12
+  public var cornerRadius: CGFloat = 12
 
-  var textColor: Color = JCThemeColor.shared.navigationBar
-  var font: Font = JCThemeFont.shared.navigationTitle
-  var alignment: TextAlignment = .center
+  public var textColor: Color = JCThemeColor.shared.navigationBar
+  public var font: Font = JCThemeFont.shared.navigationTitle
+  public var alignment: TextAlignment = .center
 }
 
-
 public struct JCMessageBox: View {
-  var message: String
-  var config: JCMessageBoxConfig = JCMessageBoxConfig.shared
+  public var message: String
+  public var config: JCMessageBoxConfig = JCMessageBoxConfig.shared
 
   public var body: some View {
     ZStack {

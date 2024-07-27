@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum JCProgressRingStartPosition {
+public enum JCProgressRingStartPosition {
   case top
   case bottom
   case left
@@ -17,19 +17,19 @@ enum JCProgressRingStartPosition {
 // Editing config.shared ensures that this component looks the same wherever it is used,
 // Or have a new Config() to make it special.
 public struct JCProgressRingConfig {
-  static let shared = JCProgressRingConfig()
+  public static let shared = JCProgressRingConfig()
 
-  var width: CGFloat = 100
-  var ringWidth: CGFloat = 12
-  var ringColor: Color = JCThemeColor.shared.primary
+  public var width: CGFloat = 100
+  public var ringWidth: CGFloat = 12
+  public var ringColor: Color = JCThemeColor.shared.primary
 
-  var start: JCProgressRingStartPosition = .top
+  public var start: JCProgressRingStartPosition = .top
 }
 
 public struct JCProgressRing: View {
   @State var percent: CGFloat
 
-  var config = JCProgressRingConfig.shared
+  public var config = JCProgressRingConfig.shared
 
   public var body: some View {
     ZStack {

@@ -76,5 +76,3 @@ private struct RoundedCorner: Shape {
   }
 
 #endif
-
-

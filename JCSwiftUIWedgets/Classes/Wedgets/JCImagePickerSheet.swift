@@ -36,30 +36,30 @@ struct JCImagePickerSheetModifier: ViewModifier {
 // Editing config.shared ensures that this component looks the same wherever it is used.
 // Or have a new Config() to make it special.
 public struct JCImagePickerSheetConfig {
-  static let shared = JCImagePickerSheetConfig()
+  public static let shared = JCImagePickerSheetConfig()
 
-  var grantCameraPermissionString = "Grant camera permission"
-  var takePhotoString = "Take a Photo"
-  var takePhotoIcon = Image(systemName: "camera")
-  var chooseFromAlbumString = "Choose From Album"
-  var chooseFromAlbumIcon = Image(systemName: "photo.on.rectangle.angled")
+  public var grantCameraPermissionString = "Grant camera permission"
+  public var takePhotoString = "Take a Photo"
+  public var takePhotoIcon = Image(systemName: "camera")
+  public var chooseFromAlbumString = "Choose From Album"
+  public var chooseFromAlbumIcon = Image(systemName: "photo.on.rectangle.angled")
 
-  var overlayColor = Color.gray.opacity(0.5)
-  var sheetHeight: CGFloat = 178
-  var backgroundColor = Color(withHex: "F0F0F0")
-  var foregroundColor = Color(withHex: "#333333")
+  public var overlayColor = Color.gray.opacity(0.5)
+  public var sheetHeight: CGFloat = 178
+  public var backgroundColor = Color(withHex: "F0F0F0")
+  public var foregroundColor = Color(withHex: "#333333")
 
-  var leftMargin: CGFloat = 32
-  var buttonHeight: CGFloat = 64
-  var buttonStyle = JCButtonStyle.HighlightStyle(backgroundColor: JCColorPair(normal: Color.clear, highlight: Color(withHex: "#CCCCCC")))
+  public var leftMargin: CGFloat = 32
+  public var buttonHeight: CGFloat = 64
+  public var buttonStyle = JCButtonStyle.HighlightStyle(backgroundColor: JCColorPair(normal: Color.clear, highlight: Color(withHex: "#CCCCCC")))
 }
 
 public struct JCImagePickerSheet: View {
   @Binding var isPresented: Bool
 
-  var didSelectImage: (UIImage) -> Void
+  public var didSelectImage: (UIImage) -> Void
 
-  var config = JCImagePickerSheetConfig.shared
+  public var config = JCImagePickerSheetConfig.shared
 
   @State private var isStarted = false
   @State private var showImagePicker = false

@@ -76,6 +76,8 @@ pod 'JCSwiftUIWedgets'
 
 James, infilachen@gmail.com, [LinkedIn](https://www.linkedin.com/in/jameschen5428)
 
+Fanny, fanfan.feng9@gmail.com
+
 ## License
 
 JCSwiftUIWedgets is available under the MIT license. See the LICENSE file for more info.
