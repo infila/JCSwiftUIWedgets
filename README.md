@@ -21,8 +21,8 @@ Here are three frameworks for junior developers. They can help you increase deve
 
 <img src="READMEAssets/ButtonStyles.png" width="300px"></img>
 
-2 steps to make a customized ButtonStyle, and apply:
-* Step 1, add an extension like: 
+Only two steps to make a customized ButtonStyle, and apply it to a button:
+**Step 1:** add an extension to JCButtonStyle.FixedSizeRounded, like the following: 
 ```ruby
 extension JCButtonStyle.FixedSizeRounded {
   static let smallYellow = JCButtonStyle.FixedSizeRounded(
@@ -37,21 +37,23 @@ extension JCButtonStyle.FixedSizeRounded {
 }
 ```
 
-* Step 2, applying:
+* Step 2, apply the style to a button:
 ```ruby
 Button("Button") {
+  // click event
   print("Button Clicked")
 }
 .buttonStyle(JCButtonStyle.FixedSizeRounded.smallYellow)
 ```
 
-or applying on A HStack with a icon and a title:
+or applying it on an HStack with an icon and a title:
 ```ruby
 HStack(spacing: 4) {
   Image(systemName: "pencil.circle")
   Text("Edit")
 }
 .buttonWrapped {
+  // click event
   print("Button Clicked")
 }
 .buttonStyle(JCButtonStyle.FixedSizeRounded.smallYellow)
