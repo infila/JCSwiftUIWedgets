@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Here are three frameworks for junior developers. They can help you increase development efficiency and write more standardized, maintainable code.:
+JCFramework contains three frameworks for junior developers. They can help you increase development efficiency and write more standardized, maintainable code.
 
 [JCSwiftCommon](https://github.com/infila/JCSwiftCommon): for extensions, some common function, and a lightweight local storage tool based on file system IO.
 
@@ -76,9 +76,9 @@ pod 'JCSwiftUIWedgets'
 
 ## Author
 
-James, infilachen@gmail.com, [LinkedIn](https://www.linkedin.com/in/jameschen5428)
+**James,**  Contact: infilachen@gmail.com, [LinkedIn](https://www.linkedin.com/in/jameschen5428)
 
-Fanny, fanfan.feng9@gmail.com
+Fanny,  Contact: fanfan.feng9@gmail.com
 
 ## License
 
