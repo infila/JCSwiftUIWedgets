@@ -10,4 +10,9 @@ import SwiftUI
 public struct JCColorPair {
   public var normal: Color
   public var highlight: Color
+
+  public init(normal: Color, highlight: Color) {
+    self.normal = normal
+    self.highlight = highlight
+  }
 }

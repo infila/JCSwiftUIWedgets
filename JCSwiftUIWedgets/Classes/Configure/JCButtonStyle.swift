@@ -14,11 +14,11 @@ public struct JCButtonStyle {
     public var width: CGFloat
     public var height: CGFloat
     //  cornerRadius should be suitable
-    public var cornerRadius: CGFloat = 12
-    public var textFont: Font = JCThemeFont.shared.L
-    public var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal, highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
-    public var backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimary.normal, highlight: JCThemeColor.shared.buttonPrimary.highlight)
-    public var strokeColor: JCColorPair? = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryBorder.normal, highlight: JCThemeColor.shared.buttonPrimaryBorder.highlight)
+    public var cornerRadius: CGFloat
+    public var textFont: Font
+    public var textColor: JCColorPair
+    public var backgroundColor: JCColorPair
+    public var strokeColor: JCColorPair?
     public var strokeWidth: CGFloat = 2
 
     public func makeBody(configuration: Self.Configuration) -> some View {
@@ -32,6 +32,24 @@ public struct JCButtonStyle {
         .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
         .cornerRadius(cornerRadius, corners: .allCorners)
     }
+
+    public init(width: CGFloat,
+                height: CGFloat,
+                cornerRadius: CGFloat = 12,
+                textFont: Font = JCThemeFont.shared.L,
+                textColor: JCColorPair = JCThemeColor.shared.buttonPrimaryText,
+                backgroundColor: JCColorPair = JCThemeColor.shared.buttonPrimary,
+                strokeColor: JCColorPair? = JCThemeColor.shared.buttonPrimaryBorder,
+                strokeWidth: CGFloat = 2) {
+      self.width = width
+      self.height = height
+      self.cornerRadius = cornerRadius
+      self.textFont = textFont
+      self.textColor = textColor
+      self.backgroundColor = backgroundColor
+      self.strokeColor = strokeColor
+      self.strokeWidth = strokeWidth
+    }
   }
 
   // A fixed-size with gradient background style
@@ -39,14 +57,10 @@ public struct JCButtonStyle {
   public struct GradientBackground: ButtonStyle {
     public var width: CGFloat
     public var height: CGFloat
-    public var textFont: Font = JCThemeFont.shared.L
-    public var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal,
-                                                    highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
-    public var colors: [JCColorPair] = [JCColorPair(normal: Color.purple.opacity(0.7),
-                                                    highlight: Color.purple.opacity(0.9)),
-                                        JCColorPair(normal: Color.blue.opacity(0.7),
-                                                    highlight: Color.blue.opacity(0.9))]
-    public var cornerRadius: CGFloat = 16
+    public var textFont: Font
+    public var textColor: JCColorPair
+    public var colors: [JCColorPair]
+    public var cornerRadius: CGFloat
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
@@ -60,18 +74,40 @@ public struct JCButtonStyle {
         .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
         .cornerRadius(cornerRadius, corners: .allCorners)
     }
+
+    public init(width: CGFloat,
+                height: CGFloat,
+                textFont: Font = JCThemeFont.shared.L,
+                textColor: JCColorPair = JCThemeColor.shared.buttonPrimaryText,
+                colors: [JCColorPair],
+                cornerRadius: CGFloat = 16) {
+      self.width = width
+      self.height = height
+      self.textFont = textFont
+      self.textColor = textColor
+      self.colors = colors
+      self.cornerRadius = cornerRadius
+    }
   }
 
   public struct HighlightStyle: ButtonStyle {
-    public var textFont: Font = JCThemeFont.shared.M
-    public var textColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonPrimaryText.normal, highlight: JCThemeColor.shared.buttonPrimaryText.highlight)
-    public var backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.shared.buttonSecondary.normal, highlight: JCThemeColor.shared.buttonSecondary.highlight)
+    public var textFont: Font
+    public var textColor: JCColorPair
+    public var backgroundColor: JCColorPair
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
         .font(textFont)
         .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
         .background(configuration.isPressed ? backgroundColor.highlight : backgroundColor.normal)
+    }
+
+    public init(textFont: Font = JCThemeFont.shared.M,
+                textColor: JCColorPair = JCThemeColor.shared.buttonPrimaryText,
+                backgroundColor: JCColorPair = JCThemeColor.shared.buttonSecondary) {
+      self.textFont = textFont
+      self.textColor = textColor
+      self.backgroundColor = backgroundColor
     }
   }
 }
@@ -152,7 +188,10 @@ private extension JCButtonStyle.FixedSizeRounded {
     Button("GradientBackground") {
       print("Button Clicked")
     }
-    .buttonStyle(JCButtonStyle.GradientBackground(width: 220, height: 44))
+    .buttonStyle(JCButtonStyle.GradientBackground(width: 220, height: 44, colors: [JCColorPair(normal: Color.purple.opacity(0.7),
+                                                                                               highlight: Color.purple.opacity(0.9)),
+                                                                                   JCColorPair(normal: Color.blue.opacity(0.7),
+                                                                                               highlight: Color.blue.opacity(0.9))]))
 
     HStack(spacing: 4) {
       Image(systemName: "pencil.circle")
