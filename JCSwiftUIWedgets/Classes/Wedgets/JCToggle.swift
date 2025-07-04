@@ -15,15 +15,15 @@ public struct JCToggleConfig {
   public var width: CGFloat = 52
   public var height: CGFloat = 32
 
-  public var backgroundColor = JCColorPair(normal: JCThemeColor.shared.separateLine, highlight: JCThemeColor.shared.success.opacity(0.3))
-  public var foregroundColor = JCColorPair(normal: JCThemeColor.shared.navigationBar, highlight: JCThemeColor.shared.success)
+  public var backgroundColor = JCColorPair(normal: JCThemeColor.separateLine, highlight: JCThemeColor.success.opacity(0.3))
+  public var foregroundColor = JCColorPair(normal: JCThemeColor.navigationBar, highlight: JCThemeColor.success)
 
   public var thumbHeight: CGFloat = 24
   public var thumbOffset: CGFloat = 10
 }
 
 public struct JCToggle: View {
-  public var tintColor: Color = JCThemeColor.shared.primary
+  public var tintColor: Color = JCThemeColor.primary
   @Binding public var isOn: Bool
   public var onChange: ((Bool) -> Void)?
 

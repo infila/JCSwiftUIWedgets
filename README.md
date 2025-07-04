@@ -30,7 +30,7 @@ extension JCButtonStyle.FixedSizeRounded {
     width: 66,
     height: 40,
     cornerRadius: 8,
-    textFont: JCThemeFont.shared.S,
+    textFont: JCThemeFont.S,
     textColor: JCColorPair(normal: .white, highlight: .white),
     backgroundColor: JCColorPair(normal: .yellow, highlight: .yellow.opacity(0.5)),
     strokeColor: JCColorPair(normal: .yellow, highlight: .orange)

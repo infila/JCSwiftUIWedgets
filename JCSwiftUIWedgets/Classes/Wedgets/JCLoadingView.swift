@@ -38,7 +38,7 @@ public struct JCLoadingViewConfig {
   public static let shared = JCLoadingViewConfig()
 
   public var backgroundColor = Color.gray.opacity(0.4)
-  public var spin: JCLoadingSpin = JCLoadingSpin.circle(trimEnd: 0.6, lineWidth: 4, strokeColor: JCThemeColor.shared.success, diameter: 50)
+  public var spin: JCLoadingSpin = JCLoadingSpin.circle(trimEnd: 0.6, lineWidth: 4, strokeColor: JCThemeColor.success, diameter: 50)
 }
 
 public struct JCLoadingView: View {

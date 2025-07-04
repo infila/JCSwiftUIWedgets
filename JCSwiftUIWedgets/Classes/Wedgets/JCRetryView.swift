@@ -14,16 +14,16 @@ public struct JCRetryViewConfig {
 
   public var spacing: CGFloat = 20
 
-  public var icon: (some View)? = Image(systemName: "info.circle").mask(color: JCThemeColor.shared.primary)
+  public var icon: (some View)? = Image(systemName: "info.circle").mask(color: JCThemeColor.primary)
 
   public var errorTitle: String = "Network Error"
-  public var errorTitleFont: Font = JCThemeFont.shared.L
-  public var errorTitleColor: Color = JCThemeColor.shared.primary
+  public var errorTitleFont: Font = JCThemeFont.L
+  public var errorTitleColor: Color = JCThemeColor.primary
 
   public var errorMessageMaxWidth = UIScreen.main.bounds.width - 80
   public var errorMessage: String = "Please check your network environment, and retry later."
-  public var errorMessageFont: Font = JCThemeFont.shared.M
-  public var errorMessageColor: Color = JCThemeColor.shared.secondary
+  public var errorMessageFont: Font = JCThemeFont.M
+  public var errorMessageColor: Color = JCThemeColor.secondary
 
   public var retryButtonTitle: String = "Retry"
 
@@ -38,7 +38,7 @@ public struct JCRetryView: View {
 
   public var body: some View {
     ZStack {
-      JCThemeColor.shared.background
+      JCThemeColor.background
       if isloading {
         JCLoadingView()
       } else {

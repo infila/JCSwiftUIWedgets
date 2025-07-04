@@ -11,8 +11,8 @@ import SwiftUI
 public struct JCPageIndicatorConfig {
   public static let shared = JCPageIndicatorConfig()
 
-  public var defaultColor = JCThemeColor.shared.success
-  public var selectedColor = JCThemeColor.shared.primary
+  public var defaultColor = JCThemeColor.success
+  public var selectedColor = JCThemeColor.primary
 
   public var dotSpacing: CGFloat = 8
   public var dotDiameter: CGFloat = 5
