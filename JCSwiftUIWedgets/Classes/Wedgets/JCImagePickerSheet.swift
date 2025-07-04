@@ -93,7 +93,7 @@ public struct JCImagePickerSheet: View {
                 .padding([.leading], config.leftMargin)
               Text(IsCameraDenied() ? config.grantCameraPermissionString : config.takePhotoString)
                 .foregroundColor(config.foregroundColor)
-                .font(JCThemeFont.shared.M)
+                .font(JCThemeFont.M)
               Spacer()
             }
             .frame(height: config.buttonHeight)
@@ -109,7 +109,7 @@ public struct JCImagePickerSheet: View {
                 .padding([.leading], config.leftMargin)
               Text(config.chooseFromAlbumString)
                 .foregroundColor(config.foregroundColor)
-                .font(JCThemeFont.shared.M)
+                .font(JCThemeFont.M)
               Spacer()
             }
             .frame(height: config.buttonHeight)

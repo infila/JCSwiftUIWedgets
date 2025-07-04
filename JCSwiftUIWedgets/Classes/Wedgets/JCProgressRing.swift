@@ -21,7 +21,7 @@ public struct JCProgressRingConfig {
 
   public var width: CGFloat = 100
   public var ringWidth: CGFloat = 12
-  public var ringColor: Color = JCThemeColor.shared.primary
+  public var ringColor: Color = JCThemeColor.primary
 
   public var start: JCProgressRingStartPosition = .top
 }

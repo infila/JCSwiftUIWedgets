@@ -20,26 +20,27 @@ public struct JCButtonStyle {
     public var backgroundColor: JCColorPair
     public var strokeColor: JCColorPair?
     public var strokeWidth: CGFloat = 2
+    @Environment(\.isEnabled) private var isEnabled
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
         .frame(width: width, height: height)
         .font(textFont)
         .background(RoundedRectangle(cornerSize: CGSize(width: cornerRadius, height: cornerRadius))
-          .strokeBorder((configuration.isPressed ? strokeColor?.highlight : strokeColor?.normal) ?? JCThemeColor.shared.clear, lineWidth: strokeColor == nil ? 0 : strokeWidth)
-          .background(configuration.isPressed ? backgroundColor.highlight : backgroundColor.normal)
+          .strokeBorder((!isEnabled ? strokeColor?.disabled : configuration.isPressed ? strokeColor?.highlight : strokeColor?.normal) ?? JCThemeColor.clear, lineWidth: strokeColor == nil ? 0 : strokeWidth)
+          .background(!isEnabled ? backgroundColor.disabled : configuration.isPressed ? backgroundColor.highlight : backgroundColor.normal)
           .clipped())
-        .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
+        .foregroundColor(!isEnabled ? textColor.disabled : configuration.isPressed ? textColor.highlight : textColor.normal)
         .cornerRadius(cornerRadius, corners: .allCorners)
     }
 
     public init(width: CGFloat,
                 height: CGFloat,
                 cornerRadius: CGFloat = 12,
-                textFont: Font = JCThemeFont.shared.L,
-                textColor: JCColorPair = JCThemeColor.shared.buttonPrimaryText,
-                backgroundColor: JCColorPair = JCThemeColor.shared.buttonPrimary,
-                strokeColor: JCColorPair? = JCThemeColor.shared.buttonPrimaryBorder,
+                textFont: Font = JCThemeFont.L,
+                textColor: JCColorPair = JCThemeColor.buttonPrimaryText,
+                backgroundColor: JCColorPair = JCThemeColor.buttonPrimary,
+                strokeColor: JCColorPair? = JCThemeColor.buttonPrimaryBorder,
                 strokeWidth: CGFloat = 2) {
       self.width = width
       self.height = height
@@ -61,24 +62,25 @@ public struct JCButtonStyle {
     public var textColor: JCColorPair
     public var colors: [JCColorPair]
     public var cornerRadius: CGFloat
+    @Environment(\.isEnabled) private var isEnabled
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
         .font(textFont)
         .frame(width: width, height: height)
         .background(
-          configuration.isPressed ?
+          !isEnabled ? LinearGradient(colors: colors.map({ $0.disabled }), startPoint: .topLeading, endPoint: .bottomTrailing) : configuration.isPressed ?
             LinearGradient(colors: colors.map({ $0.highlight }), startPoint: .topLeading, endPoint: .bottomTrailing) :
             LinearGradient(colors: colors.map({ $0.normal }), startPoint: .topLeading, endPoint: .bottomTrailing)
         )
-        .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
+        .foregroundColor(!isEnabled ? textColor.disabled : (configuration.isPressed ? textColor.highlight : textColor.normal))
         .cornerRadius(cornerRadius, corners: .allCorners)
     }
 
     public init(width: CGFloat,
                 height: CGFloat,
-                textFont: Font = JCThemeFont.shared.L,
-                textColor: JCColorPair = JCThemeColor.shared.buttonPrimaryText,
+                textFont: Font = JCThemeFont.L,
+                textColor: JCColorPair = JCThemeColor.buttonPrimaryText,
                 colors: [JCColorPair],
                 cornerRadius: CGFloat = 16) {
       self.width = width
@@ -94,17 +96,18 @@ public struct JCButtonStyle {
     public var textFont: Font
     public var textColor: JCColorPair
     public var backgroundColor: JCColorPair
+    @Environment(\.isEnabled) private var isEnabled
 
     public func makeBody(configuration: Self.Configuration) -> some View {
       configuration.label
         .font(textFont)
-        .foregroundColor(configuration.isPressed ? textColor.highlight : textColor.normal)
-        .background(configuration.isPressed ? backgroundColor.highlight : backgroundColor.normal)
+        .foregroundColor(!isEnabled ? textColor.disabled : configuration.isPressed ? textColor.highlight : textColor.normal)
+        .background(!isEnabled ? textColor.disabled : configuration.isPressed ? backgroundColor.highlight : backgroundColor.normal)
     }
 
-    public init(textFont: Font = JCThemeFont.shared.M,
-                textColor: JCColorPair = JCThemeColor.shared.buttonPrimaryText,
-                backgroundColor: JCColorPair = JCThemeColor.shared.buttonSecondary) {
+    public init(textFont: Font = JCThemeFont.M,
+                textColor: JCColorPair = JCThemeColor.buttonPrimaryText,
+                backgroundColor: JCColorPair = JCThemeColor.buttonSecondary) {
       self.textFont = textFont
       self.textColor = textColor
       self.backgroundColor = backgroundColor
@@ -122,14 +125,14 @@ private extension JCButtonStyle.FixedSizeRounded {
   static let secondary = JCButtonStyle.FixedSizeRounded(
     width: UIScreen.main.bounds.width - 60,
     height: 55,
-    textColor: JCThemeColor.shared.buttonSecondaryText,
-    backgroundColor: JCThemeColor.shared.buttonSecondary,
-    strokeColor: JCThemeColor.shared.buttonSecondaryBorder
+    textColor: JCThemeColor.buttonSecondaryText,
+    backgroundColor: JCThemeColor.buttonSecondary,
+    strokeColor: JCThemeColor.buttonSecondaryBorder
   )
   static let loginButtonStyle = JCButtonStyle.FixedSizeRounded(
     width: 270,
     height: 52,
-    textColor: JCColorPair(normal: .white, highlight: .white),
+    textColor: JCColorPair(normal: .white, highlight: .white, disabled: .white.opacity(0.7)),
     backgroundColor: JCColorPair(normal: .yellow, highlight: .yellow.opacity(0.5)),
     strokeColor: JCColorPair(normal: .yellow, highlight: .orange)
   )
@@ -138,8 +141,8 @@ private extension JCButtonStyle.FixedSizeRounded {
     width: 66,
     height: 40,
     cornerRadius: 8,
-    textFont: JCThemeFont.shared.S,
-    textColor: JCColorPair(normal: .white, highlight: .white),
+    textFont: JCThemeFont.S,
+    textColor: JCColorPair(normal: .white, highlight: .white, disabled: .white.opacity(0.7)),
     backgroundColor: JCColorPair(normal: .yellow, highlight: .yellow.opacity(0.5)),
     strokeColor: JCColorPair(normal: .yellow, highlight: .orange)
   )
@@ -151,16 +154,19 @@ private extension JCButtonStyle.FixedSizeRounded {
       print("Button Clicked")
     }
     .buttonStyle(JCButtonStyle.FixedSizeRounded.main)
+//    .disabled(true)
 
     Button("RoundedCorner.secondary") {
       print("Button Clicked")
     }
     .buttonStyle(JCButtonStyle.FixedSizeRounded.secondary)
+    //    .disabled(true)
 
     Button("Login") {
       print("Button Clicked")
     }
     .buttonStyle(JCButtonStyle.FixedSizeRounded.loginButtonStyle)
+//    .disabled(true)
 
     // Small button needs suitable cornerRadius to avoid border issue, seems like a System bug
     let width: CGFloat = 44, height: CGFloat = 32
@@ -192,6 +198,7 @@ private extension JCButtonStyle.FixedSizeRounded {
                                                                                                highlight: Color.purple.opacity(0.9)),
                                                                                    JCColorPair(normal: Color.blue.opacity(0.7),
                                                                                                highlight: Color.blue.opacity(0.9))]))
+//    .disabled(true)
 
     HStack(spacing: 4) {
       Image(systemName: "pencil.circle")
@@ -201,7 +208,8 @@ private extension JCButtonStyle.FixedSizeRounded {
       print("Button Clicked")
     }
     .buttonStyle(JCButtonStyle.FixedSizeRounded.regularButtonStyle)
+//        .disabled(true)
   }
   .frame(maxWidth: .infinity, maxHeight: .infinity)
-  .background(JCThemeColor.shared.background)
+  .background(JCThemeColor.background)
 }

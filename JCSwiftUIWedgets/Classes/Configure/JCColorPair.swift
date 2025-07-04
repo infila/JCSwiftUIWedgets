@@ -10,9 +10,11 @@ import SwiftUI
 public struct JCColorPair {
   public var normal: Color
   public var highlight: Color
+  public var disabled: Color
 
-  public init(normal: Color, highlight: Color) {
+  public init(normal: Color, highlight: Color, disabled: Color = JCThemeColor.separateLine) {
     self.normal = normal
     self.highlight = highlight
+    self.disabled = disabled
   }
 }

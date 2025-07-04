@@ -15,14 +15,14 @@ public struct JCMessageBoxConfig {
   public var boxWidth: CGFloat = UIScreen.main.bounds.width / 3 * 2
   public var boxHeight: CGFloat = UIScreen.main.bounds.width / 2
 
-  public var backgroundColor: Color = JCThemeColor.shared.separateLine.opacity(0.75)
+  public var backgroundColor: Color = JCThemeColor.separateLine.opacity(0.75)
 
-  public var boxBackgroundColor: Color = JCThemeColor.shared.textPrimary.opacity(0.9)
+  public var boxBackgroundColor: Color = JCThemeColor.textPrimary.opacity(0.9)
 
   public var cornerRadius: CGFloat = 12
 
-  public var textColor: Color = JCThemeColor.shared.navigationBar
-  public var font: Font = JCThemeFont.shared.navigationTitle
+  public var textColor: Color = JCThemeColor.navigationBar
+  public var font: Font = JCThemeFont.navigationTitle
   public var alignment: TextAlignment = .center
 }
 
