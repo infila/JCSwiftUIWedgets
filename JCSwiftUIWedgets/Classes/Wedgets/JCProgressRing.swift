@@ -27,9 +27,11 @@ public struct JCProgressRingConfig {
 }
 
 public struct JCProgressRing: View {
-  @State var percent: CGFloat
-
-  public var config = JCProgressRingConfig.shared
+  public init(percent: CGFloat,
+              config: JCProgressRingConfig = JCProgressRingConfig.shared) {
+    self.percent = percent
+    self.config = config
+  }
 
   public var body: some View {
     ZStack {
@@ -57,6 +59,9 @@ public struct JCProgressRing: View {
       return 0
     }
   }
+
+  private var percent: CGFloat
+  private var config: JCProgressRingConfig
 }
 
 #Preview {

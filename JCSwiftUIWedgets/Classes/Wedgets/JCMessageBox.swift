@@ -27,8 +27,10 @@ public struct JCMessageBoxConfig {
 }
 
 public struct JCMessageBox: View {
-  public var message: String
-  public var config: JCMessageBoxConfig = JCMessageBoxConfig.shared
+  public init(message: String, config: JCMessageBoxConfig = JCMessageBoxConfig.shared) {
+    self.message = message
+    self.config = config
+  }
 
   public var body: some View {
     ZStack {
@@ -45,6 +47,9 @@ public struct JCMessageBox: View {
         .foregroundColor(config.textColor)
     }
   }
+
+  private var message: String
+  private var config: JCMessageBoxConfig
 }
 
 #Preview {

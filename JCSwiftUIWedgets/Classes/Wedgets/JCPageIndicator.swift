@@ -19,10 +19,13 @@ public struct JCPageIndicatorConfig {
 }
 
 public struct JCPageIndicator: View {
-  public var pageIndex: Int
-  public var total: Int
-
-  public var config = JCPageIndicatorConfig.shared
+  public init(pageIndex: Int,
+              total: Int,
+              config: JCPageIndicatorConfig = JCPageIndicatorConfig.shared) {
+    self.pageIndex = pageIndex
+    self.total = total
+    self.config = config
+  }
 
   public var body: some View {
     HStack(spacing: config.dotSpacing) {
@@ -35,6 +38,10 @@ public struct JCPageIndicator: View {
       }
     }
   }
+
+  private var pageIndex: Int
+  private var total: Int
+  private var config: JCPageIndicatorConfig
 }
 
 #Preview {

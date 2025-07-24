@@ -31,10 +31,13 @@ public struct JCRetryViewConfig {
 }
 
 public struct JCRetryView: View {
-  public var isloading: Bool = false
-  public var retryClicked: (() -> Void)?
-
-  public var config = JCRetryViewConfig.shared
+  public init(isloading: Bool,
+              retryClicked: (() -> Void)? = nil,
+              config: JCRetryViewConfig = JCRetryViewConfig.shared) {
+    self.isloading = isloading
+    self.retryClicked = retryClicked
+    self.config = config
+  }
 
   public var body: some View {
     ZStack {
@@ -68,6 +71,10 @@ public struct JCRetryView: View {
       }
     }
   }
+
+  private var isloading: Bool = false
+  private var retryClicked: (() -> Void)?
+  private var config = JCRetryViewConfig.shared
 }
 
 #Preview {

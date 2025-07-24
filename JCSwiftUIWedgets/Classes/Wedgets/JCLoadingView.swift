@@ -42,7 +42,9 @@ public struct JCLoadingViewConfig {
 }
 
 public struct JCLoadingView: View {
-  var config: JCLoadingViewConfig = JCLoadingViewConfig.shared
+  public init(config: JCLoadingViewConfig = JCLoadingViewConfig.shared) {
+    self.config = config
+  }
 
   public var body: some View {
     GeometryReader { geo in
@@ -85,8 +87,18 @@ public struct JCLoadingView: View {
     }
   }
 
-  @State internal var isAppeared = false
-  @State internal var isRotated = false
+  private var config: JCLoadingViewConfig
+
+  @State fileprivate var isAppeared = false
+  @State fileprivate var isRotated = false
+  // only for test
+  fileprivate init(config: JCLoadingViewConfig = JCLoadingViewConfig.shared,
+                   isAppeared: Bool = false,
+                   isRotated: Bool = false) {
+    self.config = config
+    self.isAppeared = isAppeared
+    self.isRotated = isRotated
+  }
 }
 
 #Preview {

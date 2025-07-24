@@ -76,7 +76,7 @@
 		BCB961042035244A3501AABA6EF582BF /* NavigationLink+Ext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NavigationLink+Ext.swift"; sourceTree = "<group>"; };
 		CD3FFFBB1A1534073562C441A0706A8B /* JCToggle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JCToggle.swift; sourceTree = "<group>"; };
 		D1DAE25E8C65C687A776BADE1C667C10 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E953E9BE8F922DCBF2CEA32F6C5E4458 /* Pods-JCSwiftUIWedgets_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-JCSwiftUIWedgets_Tests"; path = Pods_JCSwiftUIWedgets_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E953E9BE8F922DCBF2CEA32F6C5E4458 /* Pods_JCSwiftUIWedgets_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JCSwiftUIWedgets_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9AB0B75887DC71F51693C2190DE323 /* JCThemeColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JCThemeColor.swift; sourceTree = "<group>"; };
 		EC88D4BE97430A7EE3549BFE535BB7FF /* Pods-JCSwiftUIWedgets_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JCSwiftUIWedgets_Tests-Info.plist"; sourceTree = "<group>"; };
 		EFAA9FE96CA665110351E831BD3CDE8B /* JCSwiftUIWedgets.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JCSwiftUIWedgets.modulemap; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				904E3A194CEFA4829A5E27EBA2E4BCF9 /* JCSwiftUIWedgets.framework */,
-				E953E9BE8F922DCBF2CEA32F6C5E4458 /* Pods-JCSwiftUIWedgets_Tests */,
+				E953E9BE8F922DCBF2CEA32F6C5E4458 /* Pods_JCSwiftUIWedgets_Tests.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,7 +288,7 @@
 			);
 			name = "Pods-JCSwiftUIWedgets_Tests";
 			productName = Pods_JCSwiftUIWedgets_Tests;
-			productReference = E953E9BE8F922DCBF2CEA32F6C5E4458 /* Pods-JCSwiftUIWedgets_Tests */;
+			productReference = E953E9BE8F922DCBF2CEA32F6C5E4458 /* Pods_JCSwiftUIWedgets_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		F80A9AFA3DB2692489E0D0C068371124 /* JCSwiftUIWedgets */ = {
@@ -435,7 +435,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80B56199981131803B90E00FFB8D6D22 /* Pods-JCSwiftUIWedgets_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -630,7 +629,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 054B91618F6116E30CAF76825E1A84BB /* Pods-JCSwiftUIWedgets_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
