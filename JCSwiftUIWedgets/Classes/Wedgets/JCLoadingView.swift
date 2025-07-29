@@ -9,18 +9,9 @@ import SwiftUI
 
 public extension View {
   func showLoading(_ loading: Bool) -> some View {
-    modifier(JCLoadingViewModifier(isPresented: loading))
-  }
-}
-
-struct JCLoadingViewModifier: ViewModifier {
-  var isPresented: Bool
-
-  @ViewBuilder
-  func body(content: Content) -> some View {
     ZStack {
-      content.disabled(isPresented)
-      if isPresented {
+      self.disabled(loading)
+      if loading {
         JCLoadingView()
       }
     }
@@ -47,63 +38,52 @@ public struct JCLoadingView: View {
   }
 
   public var body: some View {
-    GeometryReader { geo in
-      ZStack {
-        config.backgroundColor
-          .edgesIgnoringSafeArea(.all)
+    ZStack {
+      config.backgroundColor
+        .edgesIgnoringSafeArea(.all)
 
-        if isAppeared {
-          switch config.spin {
-          case let .image(image):
-            image.rotationEffect(.degrees(isRotated ? 360 : 0))
-              .animation(.linear(duration: 1).repeatForever(autoreverses: false))
-              .onAppear {
-                isRotated = true
-              }
-          case let .circle(trimEnd, lineWidth, strokeColor, diameter):
-            Circle()
-              .trim(from: 0, to: trimEnd)
-              .stroke(
-                strokeColor,
-                lineWidth: lineWidth
-              )
-              .frame(width: diameter, height: diameter)
-              .rotationEffect(.degrees(isRotated ? 360 : 0))
-              .animation(.linear(duration: 1).repeatForever(autoreverses: false))
-              .onAppear {
-                isRotated = true
-              }
+      switch config.spin {
+      case let .image(image):
+        image.rotationEffect(.degrees(isRotated ? 360 : 0))
+          .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isRotated)
+          .onAppear {
+            isRotated = true
           }
-        }
-      }
-      .onAppear {
-        if geo.size != .zero {
-          isAppeared = true
-        }
-      }
-      .onValueChanged(geo.frame(in: .global)) { _ in
-        isAppeared = true
+      case let .circle(trimEnd, lineWidth, strokeColor, diameter):
+        Circle()
+          .trim(from: 0, to: trimEnd)
+          .stroke(
+            strokeColor,
+            lineWidth: lineWidth
+          )
+          .frame(width: diameter, height: diameter)
+          .rotationEffect(.degrees(isRotated ? 360 : 0))
+          .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isRotated)
+          .onAppear {
+            isRotated = true
+          }
       }
     }
   }
 
   private var config: JCLoadingViewConfig
-
-  @State fileprivate var isAppeared = false
-  @State fileprivate var isRotated = false
-  // only for test
-  fileprivate init(config: JCLoadingViewConfig = JCLoadingViewConfig.shared,
-                   isAppeared: Bool = false,
-                   isRotated: Bool = false) {
-    self.config = config
-    self.isAppeared = isAppeared
-    self.isRotated = isRotated
-  }
+  @State private var isRotated = false
 }
 
 #Preview {
-//      JCLoadingView(config: JCLoadingViewConfig(spin:.image(Image(systemName: "arrowshape.forward")) ))
+  struct PreviewWrapper: View {
+    @State var isLoading = false
 
-  // set true to stop animation, otherwise CPU is pretty hot
-  JCLoadingView(isAppeared: true, isRotated: true)
+    var body: some View {
+      VStack {
+        Text("show loading")
+          .buttonWrapped {
+            isLoading = true
+          }
+          .buttonStyle(JCButtonStyle.FixedSizeRounded(width: 160, height: 48))
+      }
+      .showLoading(isLoading)
+    }
+  }
+  return PreviewWrapper()
 }

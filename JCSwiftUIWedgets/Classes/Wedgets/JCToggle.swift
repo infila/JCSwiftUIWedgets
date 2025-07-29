@@ -12,10 +12,10 @@ import SwiftUI
 public struct JCToggleConfig {
   public static let shared = JCToggleConfig()
 
-  public var width: CGFloat = 58
-  public var height: CGFloat = 38
+  public var width: CGFloat = 52
+  public var height: CGFloat = 32
   public var thumbHeight: CGFloat = 28
-  public var thumbOffsetFromCenter: CGFloat = 8
+  public var thumbOffsetFromCenter: CGFloat = 10
 
   public var backgroundColor = JCColorPair(normal: JCThemeColor.success.opacity(0.3),
                                            highlight: JCThemeColor.success.opacity(0.1),
@@ -70,7 +70,7 @@ public struct JCToggle: View {
     @State private var isOn1 = true
     @State private var isOn2 = false
 
-    let ToggleStyle2 = JCToggleConfig(width: 72, height: 36, thumbHeight: 28, thumbOffsetFromCenter: 15)
+    let ToggleStyle2 = JCToggleConfig(width: 72, height: 36, thumbHeight: 28, thumbOffsetFromCenter: 16)
 
     var body: some View {
       JCToggle(isOn: $isOn1)
