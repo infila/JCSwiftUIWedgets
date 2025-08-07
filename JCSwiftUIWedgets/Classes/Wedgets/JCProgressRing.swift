@@ -14,23 +14,33 @@ public enum JCProgressRingStartPosition {
   case right
 }
 
-// Editing config.shared ensures that this component looks the same wherever it is used,
-// Or have a new Config() to make it special.
-public struct JCProgressRingConfig {
-  public static let shared = JCProgressRingConfig()
+// Editing appearance.shared ensures that this component looks the same wherever it is used,
+// Or have a new Appearance() to make it special.
+public class JCProgressRingAppearance {
+  public static let shared = JCProgressRingAppearance()
 
   public var width: CGFloat = 100
   public var ringWidth: CGFloat = 12
   public var ringColor: Color = JCThemeColor.primary
 
   public var start: JCProgressRingStartPosition = .top
+
+  public init(width: CGFloat = 100,
+              ringWidth: CGFloat = 12,
+              ringColor: Color = JCThemeColor.primary,
+              start: JCProgressRingStartPosition = .top) {
+    self.width = width
+    self.ringWidth = ringWidth
+    self.ringColor = ringColor
+    self.start = start
+  }
 }
 
 public struct JCProgressRing: View {
   public init(percent: CGFloat,
-              config: JCProgressRingConfig = JCProgressRingConfig.shared) {
+              appearance: JCProgressRingAppearance = JCProgressRingAppearance.shared) {
     self.percent = percent
-    self.config = config
+    self.appearance = appearance
   }
 
   public var body: some View {
@@ -38,17 +48,17 @@ public struct JCProgressRing: View {
       Circle()
         .trim(to: percent)
         .stroke(
-          config.ringColor,
-          lineWidth: config.ringWidth
+          appearance.ringColor,
+          lineWidth: appearance.ringWidth
         )
-        .frame(width: config.width - config.ringWidth, height: config.width - config.ringWidth)
+        .frame(width: appearance.width - appearance.ringWidth, height: appearance.width - appearance.ringWidth)
         .rotationEffect(.degrees(degress()))
         .shadow(radius: 2)
-    }.frame(width: config.width, height: config.width)
+    }.frame(width: appearance.width, height: appearance.width)
   }
 
   private func degress() -> Double {
-    switch config.start {
+    switch appearance.start {
     case .top:
       return 270
     case .bottom:
@@ -61,18 +71,18 @@ public struct JCProgressRing: View {
   }
 
   private var percent: CGFloat
-  private var config: JCProgressRingConfig
+  private var appearance: JCProgressRingAppearance
 }
 
 #Preview {
   VStack {
     JCProgressRing(percent: 0.3)
-    JCProgressRing(percent: 0.9, config: JCProgressRingConfig(width: 100, ringWidth: 50, start: .bottom))
+    JCProgressRing(percent: 0.9, appearance: JCProgressRingAppearance(width: 100, ringWidth: 50, start: .bottom))
     ZStack {
-      JCProgressRing(percent: 0.4, config: JCProgressRingConfig(width: 52, ringColor: Color.orange))
-      JCProgressRing(percent: 0.3, config: JCProgressRingConfig(width: 76, ringColor: Color.red))
-      JCProgressRing(percent: 0.6, config: JCProgressRingConfig(width: 100, ringColor: Color.green))
-      JCProgressRing(percent: 0.4, config: JCProgressRingConfig(width: 124, ringColor: Color.blue))
+      JCProgressRing(percent: 0.4, appearance: JCProgressRingAppearance(width: 52, ringColor: Color.orange))
+      JCProgressRing(percent: 0.3, appearance: JCProgressRingAppearance(width: 76, ringColor: Color.red))
+      JCProgressRing(percent: 0.6, appearance: JCProgressRingAppearance(width: 100, ringColor: Color.green))
+      JCProgressRing(percent: 0.4, appearance: JCProgressRingAppearance(width: 124, ringColor: Color.blue))
     }
   }
 }

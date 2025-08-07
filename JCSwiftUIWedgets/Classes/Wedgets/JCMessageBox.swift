@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-// Editing config.shared ensures that this component looks the same wherever it is used.
-// Or have a new Config() to make it special.
-public struct JCMessageBoxConfig {
-  public static let shared: JCMessageBoxConfig = JCMessageBoxConfig()
+// Editing appearance.shared ensures that this component looks the same wherever it is used.
+// Or have a new Appearance() to make it special.
+public class JCMessageBoxAppearance {
+  public static let shared: JCMessageBoxAppearance = JCMessageBoxAppearance()
 
   public var boxWidth: CGFloat = UIScreen.main.bounds.width / 3 * 2
   public var boxHeight: CGFloat = UIScreen.main.bounds.width / 2
@@ -24,32 +24,50 @@ public struct JCMessageBoxConfig {
   public var textColor: Color = JCThemeColor.navigationBar
   public var font: Font = JCThemeFont.navigationTitle
   public var alignment: TextAlignment = .center
+
+  public init(boxWidth: CGFloat = UIScreen.main.bounds.width / 3 * 2,
+              boxHeight: CGFloat = UIScreen.main.bounds.width / 2,
+              backgroundColor: Color = JCThemeColor.separateLine.opacity(0.75),
+              boxBackgroundColor: Color = JCThemeColor.textPrimary.opacity(0.9),
+              cornerRadius: CGFloat = 12,
+              textColor: Color = JCThemeColor.navigationBar,
+              font: Font = JCThemeFont.navigationTitle,
+              alignment: TextAlignment = .center) {
+    self.boxWidth = boxWidth
+    self.boxHeight = boxHeight
+    self.backgroundColor = backgroundColor
+    self.boxBackgroundColor = boxBackgroundColor
+    self.cornerRadius = cornerRadius
+    self.textColor = textColor
+    self.font = font
+    self.alignment = alignment
+  }
 }
 
 public struct JCMessageBox: View {
-  public init(message: String, config: JCMessageBoxConfig = JCMessageBoxConfig.shared) {
+  public init(message: String, appearance: JCMessageBoxAppearance = JCMessageBoxAppearance.shared) {
     self.message = message
-    self.config = config
+    self.appearance = appearance
   }
 
   public var body: some View {
     ZStack {
-      config.backgroundColor
+      appearance.backgroundColor
         .edgesIgnoringSafeArea(.all)
-      config.boxBackgroundColor
-        .frame(width: config.boxWidth, height: config.boxHeight)
-        .cornerRadius(config.cornerRadius)
+      appearance.boxBackgroundColor
+        .frame(width: appearance.boxWidth, height: appearance.boxHeight)
+        .cornerRadius(appearance.cornerRadius)
       Text(message)
-        .multilineTextAlignment(config.alignment)
-        .frame(maxWidth: config.boxWidth - 20, maxHeight: config.boxHeight - 20)
-        .font(config.font)
+        .multilineTextAlignment(appearance.alignment)
+        .frame(maxWidth: appearance.boxWidth - 20, maxHeight: appearance.boxHeight - 20)
+        .font(appearance.font)
         .minimumScaleFactor(0.7)
-        .foregroundColor(config.textColor)
+        .foregroundColor(appearance.textColor)
     }
   }
 
   private var message: String
-  private var config: JCMessageBoxConfig
+  private var appearance: JCMessageBoxAppearance
 }
 
 #Preview {

@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+// Type Erasure Structor
+public struct AnyButtonStyle: ButtonStyle {
+  private let _makeBody: (Configuration) -> any View
+
+  public init<Style: ButtonStyle>(_ style: Style) {
+    _makeBody = { configuration in
+      style.makeBody(configuration: configuration)
+    }
+  }
+
+  public func makeBody(configuration: Configuration) -> some View {
+    AnyView(_makeBody(configuration))
+  }
+}
+
 public struct JCButtonStyle {
   // A fixed-size with rounded corner style
   // see JCButtonStyles_Previews for examples

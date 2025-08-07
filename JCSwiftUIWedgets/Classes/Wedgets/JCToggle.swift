@@ -7,50 +7,66 @@
 
 import SwiftUI
 
-// Editing config.shared ensures that this component looks the same wherever it is used.
-// Or have a new Config() to make it special.
-public struct JCToggleConfig {
-  public static let shared = JCToggleConfig()
+// Editing appearance.shared ensures that this component looks the same wherever it is used.
+// Or have a new Appearance() to make it special.
+public class JCToggleAppearance {
+  public static let shared = JCToggleAppearance()
 
-  public var width: CGFloat = 52
-  public var height: CGFloat = 32
-  public var thumbHeight: CGFloat = 28
-  public var thumbOffsetFromCenter: CGFloat = 10
+  public init(width: CGFloat = 52,
+              height: CGFloat = 32,
+              thumbHeight: CGFloat = 28,
+              thumbOffsetFromCenter: CGFloat = 10,
+              backgroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.separateLine,
+                                                         highlight: .white,
+                                                         disabled: .gray.opacity(0.3)),
+              foregroundColor: JCColorPair = JCColorPair(normal: JCThemeColor.navigationBar,
+                                                         highlight: JCThemeColor.success,
+                                                         disabled: .gray.opacity(0.5)),
+              borderColor: JCColorPair = JCColorPair(normal: JCThemeColor.success,
+                                                     highlight: JCThemeColor.success,
+                                                     disabled: .clear)) {
+    self.width = width
+    self.height = height
+    self.thumbHeight = thumbHeight
+    self.thumbOffsetFromCenter = thumbOffsetFromCenter
+    self.backgroundColor = backgroundColor
+    self.foregroundColor = foregroundColor
+    self.borderColor = borderColor
+  }
 
-  public var backgroundColor = JCColorPair(normal: JCThemeColor.success.opacity(0.3),
-                                           highlight: JCThemeColor.success.opacity(0.1),
-                                           disabled: .gray.opacity(0.3))
-  public var foregroundColor = JCColorPair(normal: JCThemeColor.navigationBar,
-                                           highlight: JCThemeColor.success,
-                                           disabled: .gray.opacity(0.5))
-  public var borderColor = JCColorPair(normal: JCThemeColor.success,
-                                       highlight: JCThemeColor.success,
-                                       disabled: .clear)
+  public var width: CGFloat
+  public var height: CGFloat
+  public var thumbHeight: CGFloat
+  public var thumbOffsetFromCenter: CGFloat
+
+  public var backgroundColor: JCColorPair
+  public var foregroundColor: JCColorPair
+  public var borderColor: JCColorPair
 }
 
 public struct JCToggle: View {
   public init(isOn: Binding<Bool>,
               onChange: ((Bool) -> Void)? = nil,
-              config: JCToggleConfig = JCToggleConfig.shared) {
+              appearance: JCToggleAppearance = JCToggleAppearance.shared) {
     _isOn = isOn
     self.onChange = onChange
-    self.config = config
+    self.appearance = appearance
   }
 
   public var body: some View {
     ZStack {
       Capsule()
-        .fill(!isEnabled ? config.backgroundColor.disabled : (isOn ? config.backgroundColor.highlight : config.backgroundColor.normal))
+        .fill(!isEnabled ? appearance.backgroundColor.disabled : (isOn ? appearance.backgroundColor.highlight : appearance.backgroundColor.normal))
         .overlay(
-          Capsule().stroke(!isEnabled ? config.borderColor.disabled : (isOn ? config.borderColor.highlight : config.borderColor.normal), lineWidth: 1)
+          Capsule().stroke(!isEnabled ? appearance.borderColor.disabled : (isOn ? appearance.borderColor.highlight : appearance.borderColor.normal), lineWidth: 1)
         )
 
       Circle()
-        .fill(!isEnabled ? config.foregroundColor.disabled : (isOn ? config.foregroundColor.highlight : config.foregroundColor.normal))
-        .frame(height: config.thumbHeight)
-        .offset(x: isOn ? config.thumbOffsetFromCenter : -config.thumbOffsetFromCenter)
+        .fill(!isEnabled ? appearance.foregroundColor.disabled : (isOn ? appearance.foregroundColor.highlight : appearance.foregroundColor.normal))
+        .frame(height: appearance.thumbHeight)
+        .offset(x: isOn ? appearance.thumbOffsetFromCenter : -appearance.thumbOffsetFromCenter)
     }
-    .frame(width: config.width, height: config.height)
+    .frame(width: appearance.width, height: appearance.height)
     .onTapGesture {
       withAnimation {
         isOn.toggle()
@@ -61,7 +77,7 @@ public struct JCToggle: View {
 
   @Binding private var isOn: Bool
   private var onChange: ((Bool) -> Void)?
-  private var config = JCToggleConfig.shared
+  private var appearance: JCToggleAppearance
   @Environment(\.isEnabled) private var isEnabled
 }
 
@@ -70,13 +86,15 @@ public struct JCToggle: View {
     @State private var isOn1 = true
     @State private var isOn2 = false
 
-    let ToggleStyle2 = JCToggleConfig(width: 72, height: 36, thumbHeight: 28, thumbOffsetFromCenter: 16)
+    let ToggleStyle2 = JCToggleAppearance(width: 72, height: 36, thumbHeight: 28, thumbOffsetFromCenter: 16)
 
     var body: some View {
-      JCToggle(isOn: $isOn1)
-      JCToggle(isOn: $isOn2)
-      JCToggle(isOn: $isOn2, config: ToggleStyle2)
-        .disabled(true)
+      VStack {
+        JCToggle(isOn: $isOn1)
+        JCToggle(isOn: $isOn2)
+        JCToggle(isOn: $isOn2, appearance: ToggleStyle2)
+          .disabled(true)
+      }
     }
   }
 

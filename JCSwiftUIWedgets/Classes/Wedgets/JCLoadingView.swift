@@ -23,9 +23,9 @@ public enum JCLoadingSpin {
   case circle(trimEnd: CGFloat, lineWidth: CGFloat, strokeColor: Color, diameter: CGFloat)
 }
 
-// Editing config.shared ensures that this component looks the same wherever it is used.
-// Or have a new Config() to make it special.
-public struct JCLoadingViewConfig {
+// Editing appearance.shared ensures that this component looks the same wherever it is used.
+// Or have a new Appearance() to make it special.
+public class JCLoadingViewConfig {
   public static let shared = JCLoadingViewConfig()
 
   public var backgroundColor = Color.gray.opacity(0.4)
@@ -33,16 +33,16 @@ public struct JCLoadingViewConfig {
 }
 
 public struct JCLoadingView: View {
-  public init(config: JCLoadingViewConfig = JCLoadingViewConfig.shared) {
-    self.config = config
+  public init(appearance: JCLoadingViewConfig = JCLoadingViewConfig.shared) {
+    self.appearance = appearance
   }
 
   public var body: some View {
     ZStack {
-      config.backgroundColor
+      appearance.backgroundColor
         .edgesIgnoringSafeArea(.all)
 
-      switch config.spin {
+      switch appearance.spin {
       case let .image(image):
         image.rotationEffect(.degrees(isRotated ? 360 : 0))
           .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isRotated)
@@ -66,7 +66,7 @@ public struct JCLoadingView: View {
     }
   }
 
-  private var config: JCLoadingViewConfig
+  private var appearance: JCLoadingViewConfig
   @State private var isRotated = false
 }
 

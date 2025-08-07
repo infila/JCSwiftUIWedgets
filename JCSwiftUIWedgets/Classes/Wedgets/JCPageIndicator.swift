@@ -7,33 +7,43 @@
 
 import SwiftUI
 
-// Editing config.shared ensures that this component looks the same wherever it is used.
-public struct JCPageIndicatorConfig {
-  public static let shared = JCPageIndicatorConfig()
+// Editing appearance.shared ensures that this component looks the same wherever it is used.
+public class JCPageIndicatorAppearance {
+  public static let shared = JCPageIndicatorAppearance()
 
   public var defaultColor = JCThemeColor.success
   public var selectedColor = JCThemeColor.primary
 
   public var dotSpacing: CGFloat = 8
   public var dotDiameter: CGFloat = 5
+
+  public init(defaultColor: Color = JCThemeColor.success,
+              selectedColor: Color = JCThemeColor.primary,
+              dotSpacing: CGFloat = 8,
+              dotDiameter: CGFloat = 5) {
+    self.defaultColor = defaultColor
+    self.selectedColor = selectedColor
+    self.dotSpacing = dotSpacing
+    self.dotDiameter = dotDiameter
+  }
 }
 
 public struct JCPageIndicator: View {
   public init(pageIndex: Int,
               total: Int,
-              config: JCPageIndicatorConfig = JCPageIndicatorConfig.shared) {
+              appearance: JCPageIndicatorAppearance = JCPageIndicatorAppearance.shared) {
     self.pageIndex = pageIndex
     self.total = total
-    self.config = config
+    self.appearance = appearance
   }
 
   public var body: some View {
-    HStack(spacing: config.dotSpacing) {
+    HStack(spacing: appearance.dotSpacing) {
       ForEach(0 ..< total, id: \.self) { index in
         if index == pageIndex {
-          config.selectedColor.frame(width: config.dotDiameter, height: config.dotDiameter).clipShape(Circle())
+          appearance.selectedColor.frame(width: appearance.dotDiameter, height: appearance.dotDiameter).clipShape(Circle())
         } else {
-          config.defaultColor.frame(width: config.dotDiameter, height: config.dotDiameter).clipShape(Circle())
+          appearance.defaultColor.frame(width: appearance.dotDiameter, height: appearance.dotDiameter).clipShape(Circle())
         }
       }
     }
@@ -41,10 +51,10 @@ public struct JCPageIndicator: View {
 
   private var pageIndex: Int
   private var total: Int
-  private var config: JCPageIndicatorConfig
+  private var appearance: JCPageIndicatorAppearance
 }
 
 #Preview {
-  JCPageIndicator(pageIndex: 0, total: 5, config: JCPageIndicatorConfig(selectedColor: Color.orange))
+  JCPageIndicator(pageIndex: 0, total: 5, appearance: JCPageIndicatorAppearance(selectedColor: Color.orange))
     .previewLayout(.fixed(width: 100, height: 10))
 }
